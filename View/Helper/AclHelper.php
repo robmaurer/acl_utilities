@@ -8,6 +8,7 @@
  * @subpackage AclUtilities.views.helpers
  */
 App::uses('AppHelper', 'View/Helper');
+App::uses('AclComponent', 'Controller/Component');
 class AclHelper extends AppHelper
 {
 	public $helpers = array('Session', 'Html');
@@ -79,8 +80,8 @@ class AclHelper extends AppHelper
 		if (!$this->isLoggedin())
 			return;
 
-		App::import('Component', 'Acl');
-		$this->__acl = new AclComponent();
+                $collection = new ComponentCollection();
+                $this->__acl = new AclComponent($collection);
 	}
 
 	/**
