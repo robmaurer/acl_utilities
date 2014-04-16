@@ -58,9 +58,9 @@ class AclHelper extends AppHelper
 	 *
 	 * Inits some variables
 	 */
-	public function beforeRender()
+	public function beforeRender($viewFile)
 	{
-		parent::beforeRender();
+		parent::beforeRender($viewFile);
 
 		$this->__blocks = array();
 
