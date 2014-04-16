@@ -7,6 +7,7 @@
  * @package AclUtilities
  * @subpackage AclUtilities.views.helpers
  */
+App::uses('AppHelper', 'View/Helper');
 class AclHelper extends AppHelper
 {
 	public $helpers = array('Session', 'Html');
