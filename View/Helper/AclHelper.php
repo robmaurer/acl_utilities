@@ -91,9 +91,9 @@ class AclHelper extends AppHelper
 	 */
 	public function check($url)
 	{
-		$params = $this->params;
+		$params = $this->request->params;
 		unset($params['pass']);
-		$url = array_merge($this->params,$url);
+		$url = array_merge($this->request->params,$url);
 
 		$controller = ucfirst($url['controller']);
 		$action = strtolower($url['action']);
