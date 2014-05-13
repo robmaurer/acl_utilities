@@ -96,7 +96,7 @@ class AclHelper extends AppHelper
 		$url = array_merge($this->request->params,$url);
 
 		$controller = Inflector::camelize($url['controller']);
-		$action = strtolower($url['action']);
+		$action = $url['action'];
 
 		// check against the allowedActions
 		if (isset($this->__allowedActions[$controller])
