@@ -1,4 +1,4 @@
-<?php
+	<?php
 /**
  * Acl Helper
  *
@@ -7,6 +7,8 @@
  * @package AclUtilities
  * @subpackage AclUtilities.views.helpers
  */
+App::uses('AppHelper', 'View/Helper');
+App::uses('AclComponent', 'Controller/Component');
 class AclHelper extends AppHelper
 {
 	public $helpers = array('Session', 'Html');
@@ -57,9 +59,9 @@ class AclHelper extends AppHelper
 	 *
 	 * Inits some variables
 	 */
-	public function beforeRender()
+	public function beforeRender($viewFile)
 	{
-		parent::beforeRender();
+		parent::beforeRender($viewFile);
 
 		$this->__blocks = array();
 
@@ -78,8 +80,8 @@ class AclHelper extends AppHelper
 		if (!$this->isLoggedin())
 			return;
 
-		App::import('Component', 'Acl');
-		$this->__acl = new AclComponent();
+                $collection = new ComponentCollection();
+                $this->__acl = new AclComponent($collection);
 	}
 
 	/**
@@ -89,12 +91,12 @@ class AclHelper extends AppHelper
 	 */
 	public function check($url)
 	{
-		$params = $this->params;
+		$params = $this->request->params;
 		unset($params['pass']);
-		$url = array_merge($this->params,$url);
+		$url = array_merge($this->request->params,$url);
 
-		$controller = ucfirst($url['controller']);
-		$action = strtolower($url['action']);
+		$controller = Inflector::camelize($url['controller']);
+		$action = $url['action'];
 
 		// check against the allowedActions
 		if (isset($this->__allowedActions[$controller])
@@ -200,7 +202,5 @@ class AclHelper extends AppHelper
 			ob_end_flush();
 		else
 			ob_end_clean();
-
-		unset($this->__blocks[$lastid]);
 	}
 }
