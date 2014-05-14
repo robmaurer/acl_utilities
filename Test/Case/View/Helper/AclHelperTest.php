@@ -94,13 +94,59 @@ class AclHelperTest extends CakeTestCase {
         $this->assertTrue($this->AclHelper->check($url), 'Check returned false');
     }
 
-
 /**
- * testLink method
+ * testLinkDenyWithMultiWordAction method
  *
  * @return void
  */
-    public function testLink() {
+    public function testLinkDenyWithMultiWordAction() {
+        $url = array('controller' => 'print', 'action' => 'letterSize', 5);
+        $this->Session->write('Auth.User.id', 3);
+        $this->AclHelper->beforeRender($this->View);
+		$this->assertEquals('', $this->AclHelper->link('Title', $url));
+	}
+
+/**
+ * testLinkAllowWithMultiWordAction method
+ *
+ * @return void
+ */
+    public function testLinkAllowWithMultiWordAction() {
+        $url = array('controller' => 'print', 'action' => 'letterSize', 5);
+        $this->Session->write('Auth.User.id', 1);
+        $this->AclHelper->beforeRender($this->View);
+		$expected = '<a href="/print/letterSize/5">Title</a>';
+		$result = $this->AclHelper->link('Title', $url);
+		$this->assertEquals($expected, $result);
+    }
+
+/**
+ * testLinkWrapperExplicit method
+ *
+ * @return void
+ */
+    public function testLinkWrapperExplicit() {
+        $url = array('controller' => 'tpsReports', 'action' => 'view', 5);
+        $this->Session->write('Auth.User.id', 1);
+        $this->AclHelper->beforeRender($this->View);
+		$expected = '<li><a href="/tpsReports/view/5">Title</a></li>';
+		$result = $this->AclHelper->link('Title', $url, array('wrapper' => '<li>%s</li>'));
+		$this->assertEquals($expected, $result);
+	}
+
+/**
+ * testLinkWrapperImplicit method
+ *
+ * @return void
+ */
+    public function testLinkWrapperImplicit() {
+        $url = array('controller' => 'tpsReports', 'action' => 'view', 5);
+        $this->Session->write('Auth.User.id', 1);
+        $this->AclHelper->beforeRender($this->View);
+		$expected = '<li><a href="/tpsReports/view/5">Title</a></li>';
+		$result = $this->AclHelper->link('Title', $url, array('wrapper' => 'li'));
+		debug($result);
+		$this->assertEquals($expected, $result);
     }
 
 }
