@@ -147,8 +147,8 @@ class AclHelper extends AppHelper
 
 		if (isset($options['wrapper']))
 		{
-			if (isset($this->Html->tags[$options['wrapper']]))
-				$wrapper = $this->Html->tags[$options['wrapper']];
+			if (isset($this->Html->_tags[$options['wrapper']]))
+				$wrapper = $this->Html->tag($options['wrapper'], '%s');
 			else
 				$wrapper = $options['wrapper'];
 
