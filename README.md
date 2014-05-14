@@ -50,51 +50,51 @@ And this is it; your links are now only displayed when they can be accessed!
 
 * use of the option wrapper: 
 
-	<ul>
-		<li>
-		<?php echo $this->Html->link(__('List Posts', true), array('action' => 'index')); ?>
-		<li>
-	<ul>
+		<ul>
+			<li>
+			<?php echo $this->Html->link(__('List Posts', true), array('action' => 'index')); ?>
+			<li>
+		<ul>
 
-	<ul>
-	<?php echo $this->Acl->link(__('List Posts', true)
-								,array('action' => 'index')
-								,array('wrapper'=>'li'); ?>
-	<ul>
+		<ul>
+		<?php echo $this->Acl->link(__('List Posts', true)
+									,array('action' => 'index')
+									,array('wrapper'=>'li'); ?>
+		<ul>
 
 * another use of the wrapper
 
-	<div class="myClass">
-		<?php echo $this->Html->link(__('List Posts', true), array('action' => 'index')); ?>
-	</div>
-
-	<?php echo $this->Acl->link(__('List Posts', true)
-								,array('action' => 'index')
-								,array('wrapper'=>'<div class="myClass">%s</div>'); ?>
+		<div class="myClass">
+			<?php echo $this->Html->link(__('List Posts', true), array('action' => 'index')); ?>
+		</div>
+	
+		<?php echo $this->Acl->link(__('List Posts', true)
+									,array('action' => 'index')
+									,array('wrapper'=>'<div class="myClass">%s</div>'); ?>
 
 * use of $this->Acl->check()
 
-  <div>
-		<?php if ($this->Acl->check(array('action' => 'index'))): ?>
-			<div class="myClass">
-				<?php echo $this->Html->link(__('List Posts', true), array('action' => 'index')); ?>
-			</div>
-		<?php endif; ?>
-	</div>
+	  	<div>
+			<?php if ($this->Acl->check(array('action' => 'index'))): ?>
+				<div class="myClass">
+					<?php echo $this->Html->link(__('List Posts', true), array('action' => 'index')); ?>
+				</div>
+			<?php endif; ?>
+		</div>
 	
 * use of blocks (only display a block if a link is successful):
 
-	<div>
-		<?php $this->Acl->startBlock() ?>
-			<div class="myClass">
-				<?php echo $this->Acl->link(__('List Posts', true), array('action' => 'index')); ?>
-			</div>
-		<?php $this->Acl->endBlock() ?>
-	</div>
+		<div>
+			<?php $this->Acl->startBlock() ?>
+				<div class="myClass">
+					<?php echo $this->Acl->link(__('List Posts', true), array('action' => 'index')); ?>
+				</div>
+			<?php $this->Acl->endBlock() ?>
+		</div>
 
 ## Use a different Model ##
 
 In AppController::beforeFilter() add this:
 
-	Configure::write('AclUtilities.modelName','Group');
-	Configure::write('AclUtilities.modelKey','Auth.User.group_id');
+		Configure::write('AclUtilities.modelName','Group');
+		Configure::write('AclUtilities.modelKey','Auth.User.group_id');
