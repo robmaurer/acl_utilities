@@ -21,7 +21,7 @@
  *
  * @package       Cake.Test.Fixture
  */
-class AcoTwoFixture extends CakeTestFixture {
+class AcoFixture extends CakeTestFixture {
 
 /**
  * fields property
