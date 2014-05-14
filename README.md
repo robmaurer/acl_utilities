@@ -54,13 +54,13 @@ And this is it; your links are now only displayed when they can be accessed!
 			<li>
 			<?php echo $this->Html->link(__('List Posts', true), array('action' => 'index')); ?>
 			<li>
-		<ul>
+		</ul>
 
 		<ul>
 		<?php echo $this->Acl->link(__('List Posts', true)
 									,array('action' => 'index')
 									,array('wrapper'=>'li'); ?>
-		<ul>
+		</ul>
 
 * another use of the wrapper
 
