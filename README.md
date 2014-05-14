@@ -27,21 +27,21 @@ Be sure to use an array format for the URL.
 * If you are using Auth->allowedActions or Auth->allow()<br>
   Then you have to move them all into AppController::beforeFilter() like the following:
 
-	function beforeFilter() {
-		//[...]
-		// $allowedActions = array([Controller]=>array([action1],[action2]);
-		Configure::write('AclUtilities.allowedActions', $allowedActions = array(
-			'News' => array('*'), // access to all the actions
-			'Groups' => array(), // no access to groups
-			'Pages' => array('display'),
-			'Posts' => array('index', 'view'),
-			'Users' => array('login','register'),
-		));
-
-		// now, we need to allow the action for the current module
-		if (isset($allowedActions[$this->name]))
-			$this->Auth->allow($allowedActions[$this->name]);
-	}
+		function beforeFilter() {
+			//[...]
+			// $allowedActions = array([Controller]=>array([action1],[action2]);
+			Configure::write('AclUtilities.allowedActions', $allowedActions = array(
+				'News' => array('*'), // access to all the actions
+				'Groups' => array(), // no access to groups
+				'Pages' => array('display'),
+				'Posts' => array('index', 'view'),
+				'Users' => array('login','register'),
+			));
+	
+			// now, we need to allow the action for the current module
+			if (isset($allowedActions[$this->name]))
+				$this->Auth->allow($allowedActions[$this->name]);
+		}
   
 And this is it; your links are now only displayed when they can be accessed!
 
